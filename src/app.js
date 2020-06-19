@@ -39,7 +39,7 @@ app.put("/repositories/:id", (request, response) => {
   }
 
   const repository = {
-    id, title, owner,
+    id, title, url, techs
   };
 
   repositories[repositoryIndex] = repository;
@@ -63,8 +63,19 @@ app.delete("/repositories/:id", (request, response) => {
 
 app.post("/repositories/:id/like", (request, response) => {
   const {id} = request.params;
+
   const repositoryIndex = repositories.findIndex(repository => repository.id == id)
+
+    title = repositoryIndex.title;
+
+  const repository = {
+    id, title, likes: + 1
+  };
+
+  repositories[repositoryIndex] = repository;
   
+  return response.json(repository);
+
 
 });
 
